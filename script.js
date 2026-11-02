@@ -181,7 +181,7 @@
       const isComparing = compareList.includes(p.id);
       return `
         <article class="product-card">
-          <img src="${p.image}" alt="${escapeHTML(p.name)}" class="product-image" loading="lazy">
+          <img src="${p.image}" alt="${escapeHTML(p.name)}" class="product-image" width="300" height="200" loading="lazy">
           <div class="product-info">
             <span class="product-category">${escapeHTML(p.category)}</span>
             <h3 class="product-title">${escapeHTML(p.name)}</h3>
