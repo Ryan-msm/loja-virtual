@@ -3,416 +3,117 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Loja acadêmica demonstrativa de componentes e acessórios de informática voltada para acessibilidade e usabilidade.">
-  <title>Lojas Quase Tudo (Menos Juízo) — Hardware & Tecnologia</title>
+  <title>Lojas Quase Tudo - E-commerce de Hardware</title>
   <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
 
-  <!-- Atalho para navegação por teclado (WCAG 2.4.1) -->
-  <a href="#catalogo" class="skip-link">Pular para o catálogo de produtos</a>
-
-  <!-- Barra do Projeto Acadêmico -->
-  <div class="notice-bar" role="region" aria-label="Aviso de projeto acadêmico">
-    PROJETO ACADÊMICO • Loja demonstrativa • Nenhum pagamento real é processado
-  </div>
-
-  <!-- Painel/Barra de Ferramentas de Acessibilidade -->
-  <aside class="accessibility-toolbar" aria-label="Ferramentas de Acessibilidade">
-    <div class="a11y-container">
-      <span class="a11y-title">♿ Acessibilidade:</span>
-      <button type="button" id="btnIncreaseText" aria-label="Aumentar tamanho do texto">A+</button>
-      <button type="button" id="btnDecreaseText" aria-label="Diminuir tamanho do texto">A-</button>
-      <button type="button" id="btnResetText" aria-label="Restaurar tamanho do texto padrão">A</button>
-      <button type="button" id="btnHighContrast" aria-pressed="false">High Contrast (Alto Contraste)</button>
-      <button type="button" id="btnColorblind" aria-pressed="false">Modo Daltônico</button>
-    </div>
-  </aside>
-
-  <!-- Cabeçalho Principal -->
-  <header class="site-header">
-    <a class="brand" href="#inicio" aria-label="Lojas Quase Tudo, página inicial">
-      <span class="brand-mark" aria-hidden="true">Q!</span>
-      <span class="brand-copy">
-        <strong>Lojas Quase Tudo</strong>
-        <small>(Menos Juízo) • Hardware & tecnologia</small>
-      </span>
-    </a>
-
-    <!-- Formulário de Busca -->
-    <form class="search-form" id="searchForm" role="search">
-      <label class="sr-only" for="searchInput">Buscar produtos no catálogo</label>
-      <input id="searchInput" type="search" placeholder="Busque por produto, marca ou modelo..." autocomplete="off">
-      <button type="submit" aria-label="Realizar busca">
-        <span aria-hidden="true">⌕</span>
-      </button>
-    </form>
-
-    <!-- Ações Rápidas do Cabeçalho -->
-    <div class="header-actions">
-      <button class="header-link" id="compareOpen" type="button" aria-label="Abrir comparação de produtos">
-        <span aria-hidden="true">⇄</span> 
-        <span>Comparar</span>
-        <b id="compareCount" aria-live="polite">0</b>
-      </button>
-      
-      <button class="cart-open" id="cartOpen" type="button" aria-label="Abrir carrinho de compras">
-        <span aria-hidden="true">🛒</span> 
-        <span>Carrinho</span>
-        <b id="cartCount" aria-live="polite">0</b>
-      </button>
-
-      <button class="admin-open" id="adminOpen" type="button" aria-label="Abrir painel de administração">
-        <span aria-hidden="true">⚙</span> <span>Administração</span>
-      </button>
+  <!-- BARRA DE ACESSIBILIDADE -->
+  <header class="accessibility-bar">
+    <div class="container accessibility-content">
+      <span>Ferramentas de Acessibilidade:</span>
+      <div class="accessibility-buttons">
+        <button id="btnFontIncrease" class="button small" aria-label="Aumentar Fonte">A+</button>
+        <button id="btnFontDecrease" class="button small" aria-label="Diminuir Fonte">A-</button>
+        <button id="btnFontReset" class="button small" aria-label="Restaurar Fonte">Padrão</button>
+        <button id="btnContrast" class="button small">Alto Contraste</button>
+        <button id="btnColorblind" class="button small">Modo Daltónico</button>
+      </div>
     </div>
   </header>
 
-  <!-- Navegação por Categorias -->
-  <nav class="category-nav" aria-label="Categorias de produtos">
-    <button class="nav-category active" data-category="Todas" aria-current="page">Todos os produtos</button>
-    <button class="nav-category" data-category="Memórias RAM">Memórias RAM</button>
-    <button class="nav-category" data-category="SSDs">SSDs</button>
-    <button class="nav-category" data-category="Placas-mãe">Placas-mãe</button>
-    <button class="nav-category" data-category="Placas de vídeo">Placas de vídeo</button>
-    <button class="nav-category" data-category="Fontes">Fontes</button>
-    <button class="nav-category" data-category="Monitores">Monitores</button>
-    <button class="nav-category" data-category="Teclados">Teclados</button>
-    <button class="nav-category" data-category="Mouses">Mouses</button>
-    <button class="nav-category" data-category="Processadores">Processadores</button>
+  <!-- NAVBAR PRINCIPAL -->
+  <nav class="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">Lojas Quase Tudo (Menos Juízo)</a>
+      <div class="nav-actions">
+        <button class="button outline" onclick="LQT.openCart()">
+          🛒 Carrinho (<span id="cartBadge">0</span>)
+        </button>
+        <button class="button outline" onclick="LQT.resetDemo()" title="Restaurar dados originais">
+          🔄 Resetar
+        </button>
+      </div>
+    </div>
   </nav>
 
-  <!-- Conteúdo Principal -->
-  <main id="inicio">
-    <section class="hero" aria-labelledby="heroTitle">
-      <div class="hero-copy">
-        <span class="eyebrow">TECNOLOGIA SEM COMPLICAÇÃO</span>
-        <h1 id="heroTitle">Seu próximo upgrade<br>começa <em>aqui.</em></h1>
-        <p>Peças, periféricos e boas escolhas para montar seu setup — sem perder a cabeça (nem o carrinho).</p>
-        <div class="hero-buttons">
-          <button class="button primary" id="shopNow">Explorar produtos <span aria-hidden="true">→</span></button>
-          <button class="button ghost" id="heroCompare">Comparar opções</button>
-        </div>
-        <div class="hero-trust">
-          <span>✓ Catálogo organizado</span>
-          <span>✓ Carrinho persistente</span>
-          <span>✓ Compra simulada</span>
-        </div>
-      </div>
-      <div class="hero-art" aria-hidden="true">
-        <div class="orb orb-one"></div>
-        <div class="orb orb-two"></div>
-        <div class="chip-card">
-          <span class="chip-label">UPGRADE MODE</span>
-          <div class="chip-symbol">⌘</div>
-          <strong>BUILD YOUR<br>OWN POWER</strong>
-          <small>HARDWARE • SETUP • PERFORMANCE</small>
-        </div>
-        <div class="floating-tag tag-top">⚡ Performance</div>
-        <div class="floating-tag tag-bottom">✦ Seu setup, suas regras</div>
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main class="container main-content">
+    
+    <!-- BARRA DE FILTROS E BUSCA -->
+    <section class="filters-section">
+      <input type="text" id="searchInput" placeholder="Pesquisar componentes (Ex: Memória, SSD, Placa)..." class="search-input">
+      
+      <select id="categoryFilter" class="select-input">
+        <option value="">Todas as Categorias</option>
+        <option value="Memórias RAM">Memórias RAM</option>
+        <option value="SSDs">SSDs</option>
+        <option value="Placas de Vídeo">Placas de Vídeo</option>
+        <option value="Processadores">Processadores</option>
+        <option value="Placas-Mãe">Placas-Mãe</option>
+        <option value="Monitores">Monitores</option>
+      </select>
+
+      <select id="sortFilter" class="select-input">
+        <option value="">Ordenar por...</option>
+        <option value="low">Menor Preço</option>
+        <option value="high">Maior Preço</option>
+        <option value="name">Nome (A-Z)</option>
+      </select>
+    </section>
+
+    <!-- CATÁLOGO DE PRODUTOS -->
+    <section>
+      <h2>Catálogo de Hardware</h2>
+      <div id="productGrid" class="product-grid">
+        <!-- O script.js injeta os produtos aqui dinamicamente -->
       </div>
     </section>
 
-    <section class="benefits" aria-label="Benefícios da loja">
-      <div>
-        <span class="benefit-icon" aria-hidden="true">⌕</span>
-        <p><strong>Encontre rápido</strong><small>Busca por nome, marca e modelo</small></p>
-      </div>
-      <div>
-        <span class="benefit-icon" aria-hidden="true">⇄</span>
-        <p><strong>Compare com clareza</strong><small>Até 3 produtos lado a lado</small></p>
-      </div>
-      <div>
-        <span class="benefit-icon" aria-hidden="true">▣</span>
-        <p><strong>Carrinho salvo</strong><small>Seus itens ficam neste navegador</small></p>
-      </div>
-      <div>
-        <span class="benefit-icon" aria-hidden="true">✓</span>
-        <p><strong>Checkout demonstrativo</strong><small>Sem cobrança ou pagamento real</small></p>
-      </div>
-    </section>
-
-    <section class="shop-section" id="catalogo" aria-labelledby="catalogTitle">
-      <div class="section-heading">
-        <div>
-          <span class="eyebrow">CATÁLOGO</span>
-          <h2 id="catalogTitle">Encontre seu próximo <em>upgrade</em></h2>
-          <p>Modelos de referência para uma experiência de compra mais simples.</p>
-        </div>
-        <div class="result-count" id="resultCount" aria-live="polite">Carregando produtos...</div>
-      </div>
-
-      <div class="shop-tools">
-        <div class="filter-chips" id="filterChips" role="toolbar" aria-label="Filtros rápidos de categoria">
-          <button class="filter-chip active" data-category="Todas">Tudo</button>
-          <button class="filter-chip" data-category="Memórias RAM">RAM</button>
-          <button class="filter-chip" data-category="SSDs">SSD</button>
-          <button class="filter-chip" data-category="Placas-mãe">Placas-mãe</button>
-          <button class="filter-chip" data-category="Placas de vídeo">GPU</button>
-          <button class="filter-chip" data-category="Fontes">Fontes</button>
-          <button class="filter-chip" data-category="Monitores">Monitores</button>
-          <button class="filter-chip" data-category="Teclados">Teclados</button>
-          <button class="filter-chip" data-category="Mouses">Mouses</button>
-          <button class="filter-chip" data-category="Processadores">CPU</button>
-        </div>
-
-        <div class="sort-wrap">
-          <label for="sortSelect">Ordenar por</label>
-          <select id="sortSelect">
-            <option value="featured">Recomendados</option>
-            <option value="price-asc">Menor preço</option>
-            <option value="price-desc">Maior preço</option>
-            <option value="name-asc">Nome A–Z</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="active-filter-line" id="activeFilterLine" aria-live="polite"></div>
-      <div class="product-grid" id="productGrid" aria-label="Lista de produtos"></div>
-
-      <div class="empty-state hidden" id="emptyState" aria-live="polite">
-        <span aria-hidden="true">⌕</span>
-        <h3>Nenhum produto encontrado</h3>
-        <p>Tente outro termo ou limpe os filtros.</p>
-        <button class="button primary" id="clearFilters">Limpar filtros</button>
-      </div>
-
-      <div class="catalog-note" role="note">
-        Preços, avaliações e estoque são demonstrativos. Consulte o anúncio original para confirmar preço e disponibilidade. Os links externos não representam integração comercial.
-      </div>
-    </section>
-
-    <section class="compare-strip" aria-labelledby="compareStripTitle">
-      <div>
-        <span class="eyebrow">ESCOLHA COM CONFIANÇA</span>
-        <h2 id="compareStripTitle">Na dúvida, <em>compare.</em></h2>
-        <p>Selecione até três produtos para visualizar diferenças de preço, categoria e especificações.</p>
-      </div>
-      <button class="button light" id="compareOpenBottom">Abrir comparador <span aria-hidden="true">→</span></button>
-    </section>
   </main>
 
-  <!-- Rodapé -->
-  <footer class="site-footer">
-    <div class="footer-main">
-      <a class="brand footer-brand" href="#inicio" aria-label="Voltar ao início">
-        <span class="brand-mark" aria-hidden="true">Q!</span>
-        <span class="brand-copy">
-          <strong>Lojas Quase Tudo</strong>
-          <small>(Menos Juízo)</small>
-        </span>
-      </a>
-      <p>Projeto acadêmico de Interface e Usabilidade. Uma demonstração de catálogo, comparação, carrinho e checkout com foco em acessibilidade e experiência do usuário.</p>
-      <div class="footer-pill">DEMO ACADÊMICA • SEM PAGAMENTOS REAIS</div>
-    </div>
-    <div class="footer-bottom">
-      <span>© <span id="year"></span> Lojas Quase Tudo (Menos Juízo)</span>
-      <span>Feito para aprender. Pensado para facilitar.</span>
-      <button id="footerAdmin" type="button">Área administrativa</button>
-    </div>
-  </footer>
-
-  <!-- Modal / Drawer: Carrinho de Compras -->
-  <div class="overlay" id="overlay" hidden></div>
-  <aside class="drawer" id="cartDrawer" aria-labelledby="cartTitle" aria-modal="true" role="dialog" hidden>
-    <div class="drawer-head">
-      <div>
-        <span class="eyebrow">SEU PEDIDO</span>
-        <h2 id="cartTitle">Meu carrinho <span id="cartTitleCount">(0)</span></h2>
+  <!-- DRAWER DO CARRINHO -->
+  <div id="cartDrawer" class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3>Seu Carrinho de Compras</h3>
+        <button class="button small" onclick="LQT.closeModal('#cartDrawer')">✕</button>
       </div>
-      <button class="icon-button" data-close aria-label="Fechar carrinho">×</button>
-    </div>
-    <div class="drawer-body" id="cartItems" tabindex="0"></div>
-    <div class="cart-coupon">
-      <label for="couponInput">Cupom de desconto</label>
-      <div class="coupon-row">
-        <input id="couponInput" placeholder="Digite seu cupom" autocomplete="off">
-        <button id="applyCoupon" class="button outline" type="button">Aplicar</button>
+      <div id="cartItems" class="modal-body">
+        <!-- Itens do carrinho -->
       </div>
-      <p id="couponMessage" class="field-message" aria-live="polite"></p>
-    </div>
-    <div class="cart-summary" id="cartSummary"></div>
-    <button class="button primary checkout-start" id="checkoutStart" type="button">Continuar para entrega <span aria-hidden="true">→</span></button>
-    <p class="secure-note">🔒 Checkout acadêmico simulado. Nenhuma cobrança será feita.</p>
-  </aside>
-
-  <!-- Modais Diversos -->
-  <section class="modal" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle" hidden>
-    <div class="modal-head">
-      <span class="eyebrow" id="productModalTitle">DETALHES DO PRODUTO</span>
-      <button class="icon-button" data-close aria-label="Fechar modal de produto">×</button>
-    </div>
-    <div id="productModalContent"></div>
-  </section>
-
-  <section class="modal compare-modal" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareTitle" hidden>
-    <div class="modal-head">
-      <div>
-        <span class="eyebrow">DECISÃO INTELIGENTE</span>
-        <h2 id="compareTitle">Comparar produtos</h2>
-      </div>
-      <button class="icon-button" data-close aria-label="Fechar comparador">×</button>
-    </div>
-    <div id="compareContent"></div>
-  </section>
-
-  <!-- Modal: Checkout -->
-  <section class="modal checkout-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle" hidden>
-    <div class="modal-head">
-      <div>
-        <span class="eyebrow">ÚLTIMO PASSO</span>
-        <h2 id="checkoutTitle">Finalizar pedido</h2>
-        <p>Preencha os dados para gerar um pedido demonstrativo.</p>
-      </div>
-      <button class="icon-button" data-close aria-label="Fechar checkout">×</button>
-    </div>
-    <div class="simulation-alert" role="alert">
-      <span aria-hidden="true">ℹ️</span> 
-      <div>
-        <strong>Simulação acadêmica</strong>
-        <p>Não informe dados bancários reais. Cartão, PIX e boleto são apenas opções ilustrativas; não haverá cobrança.</p>
-      </div>
-    </div>
-    <form id="checkoutForm" novalidate>
-      <div class="form-grid">
-        <div class="field full">
-          <label for="customerName">Nome completo *</label>
-          <input id="customerName" name="customerName" required minlength="3" autocomplete="name">
-          <small class="field-error" data-error="customerName" aria-live="polite"></small>
+      <div class="modal-footer" style="margin-top: 20px; border-top: 1px solid #ddd; padding-top: 15px;">
+        <div style="margin-bottom: 10px; display:flex; gap:10px;">
+          <input type="text" id="couponInput" placeholder="Cupom (UNIVERSIDADE10)" class="search-input" style="flex:1;">
+          <button class="button outline" onclick="LQT.applyCoupon()">Aplicar</button>
         </div>
-        <div class="field">
-          <label for="customerEmail">E-mail *</label>
-          <input id="customerEmail" name="customerEmail" type="email" required autocomplete="email">
-          <small class="field-error" data-error="customerEmail" aria-live="polite"></small>
+        <div style="font-size: 1.1rem; font-weight: bold; margin-bottom: 15px;">
+          Subtotal: <span id="cartSubtotal">R$ 0,00</span>
         </div>
-        <div class="field">
-          <label for="customerPhone">Telefone (opcional)</label>
-          <input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" placeholder="(00) 00000-0000">
-        </div>
-        <div class="field full">
-          <label for="customerAddress">Endereço de entrega *</label>
-          <input id="customerAddress" name="customerAddress" required minlength="5" autocomplete="street-address" placeholder="Rua, número, bairro e cidade">
-          <small class="field-error" data-error="customerAddress" aria-live="polite"></small>
-        </div>
-        <div class="field">
-          <label for="customerCep">CEP (opcional)</label>
-          <input id="customerCep" name="customerCep" inputmode="numeric" placeholder="00000-000">
-        </div>
-        <div class="field">
-          <label for="paymentMethod">Forma demonstrativa *</label>
-          <select id="paymentMethod" name="paymentMethod" required>
-            <option value="PIX simulado">PIX simulado</option>
-            <option value="Cartão de teste">Cartão de teste (sem número de cartão)</option>
-            <option value="Boleto demonstrativo">Boleto demonstrativo</option>
-          </select>
-        </div>
-      </div>
-      <div class="checkout-review" id="checkoutReview"></div>
-      <p class="form-global-error" id="checkoutGlobalError" aria-live="polite"></p>
-      <div class="form-actions">
-        <button class="button outline" type="button" id="backToCart">Voltar ao carrinho</button>
-        <button class="button primary" type="submit" id="confirmOrder">Confirmar pedido simulado <span aria-hidden="true">→</span></button>
-      </div>
-    </form>
-  </section>
-
-  <!-- Modais Sucesso e Admin -->
-  <section class="modal success-modal" id="successModal" role="dialog" aria-modal="true" aria-labelledby="successTitle" hidden>
-    <div id="successContent"></div>
-  </section>
-
-  <section class="modal admin-modal" id="adminModal" role="dialog" aria-modal="true" aria-labelledby="adminTitle" hidden>
-    <div class="modal-head">
-      <div>
-        <span class="eyebrow">FERRAMENTAS DA DEMONSTRAÇÃO</span>
-        <h2 id="adminTitle">Painel administrativo</h2>
-      </div>
-      <button class="icon-button" data-close aria-label="Fechar painel administrativo">×</button>
-    </div>
-    <div id="adminLogin">
-      <div class="simulation-alert" role="alert">
-        <span aria-hidden="true">⚠️</span> 
-        <div>
-          <strong>Acesso demonstrativo</strong>
-          <p>Esta senha é pública no código e não protege dados em um servidor.</p>
-        </div>
-      </div>
-      <form id="adminLoginForm">
-        <div class="field">
-          <label for="adminPassword">Senha demonstrativa</label>
-          <input id="adminPassword" type="password" autocomplete="off" required>
-          <small class="field-error" id="adminLoginError" aria-live="polite"></small>
-        </div>
-        <button class="button primary" type="submit">Entrar no painel</button>
-        <p class="muted">Senha para a apresentação: <code>admin123</code></p>
-      </form>
-    </div>
-    <div id="adminDashboard" hidden>
-      <div class="admin-tabs" role="tablist">
-        <button class="admin-tab active" data-admin-tab="products" role="tab" aria-selected="true">Produtos e estoque</button>
-        <button class="admin-tab" data-admin-tab="orders" role="tab" aria-selected="false">Pedidos</button>
-        <button class="admin-tab" data-admin-tab="editor" role="tab" aria-selected="false">Cadastrar produto</button>
-      </div>
-      <div id="adminProducts" class="admin-pane" role="tabpanel"></div>
-      <div id="adminOrders" class="admin-pane" role="tabpanel" hidden></div>
-      <div id="adminEditor" class="admin-pane" role="tabpanel" hidden>
-        <form id="productForm">
-          <input type="hidden" id="editProductId">
-          <div class="form-grid">
-            <div class="field full">
-              <label for="editName">Nome do produto *</label>
-              <input id="editName" required minlength="3">
-            </div>
-            <div class="field">
-              <label for="editCategory">Categoria *</label>
-              <select id="editCategory" required></select>
-            </div>
-            <div class="field">
-              <label for="editPrice">Preço (R$) *</label>
-              <input id="editPrice" type="number" min="0.01" step="0.01" required>
-            </div>
-            <div class="field">
-              <label for="editStock">Estoque *</label>
-              <input id="editStock" type="number" min="0" step="1" required>
-            </div>
-            <div class="field">
-              <label for="editBrand">Marca</label>
-              <input id="editBrand">
-            </div>
-            <div class="field full">
-              <label for="editImage">URL da imagem (opcional)</label>
-              <input id="editImage" type="url" placeholder="https://...">
-            </div>
-            <div class="field full">
-              <label for="editDescription">Descrição *</label>
-              <textarea id="editDescription" required rows="3"></textarea>
-            </div>
-            <div class="field full">
-              <label for="editSpecs">Especificações (separadas por vírgula)</label>
-              <input id="editSpecs" placeholder="Ex.: DDR4, 16 GB, 3200 MHz">
-            </div>
-            <div class="field full">
-              <label for="editStoreUrl">Link do anúncio original (opcional)</label>
-              <input id="editStoreUrl" type="url" placeholder="https://...">
-            </div>
-          </div>
-          <p class="field-error" id="productFormError" aria-live="polite"></p>
-          <div class="form-actions">
-            <button type="button" class="button outline" id="cancelProductEdit">Limpar</button>
-            <button type="submit" class="button primary">Salvar produto</button>
-          </div>
+        
+        <!-- FORMULÁRIO DE CHECKOUT -->
+        <form id="checkoutForm" style="display:flex; flex-direction:column; gap:10px;">
+          <input type="text" id="customerName" placeholder="Seu Nome Completo" required class="search-input">
+          <input type="email" id="customerEmail" placeholder="Seu E-mail" required class="search-input">
+          <input type="text" id="customerPhone" placeholder="Seu WhatsApp (Ex: 65999998888)" class="search-input">
+          <input type="text" id="customerAddress" placeholder="Endereço de Entrega" required class="search-input">
+          <button type="submit" class="button primary" style="width:100%; margin-top:5px;">Finalizar Compra Simulado</button>
         </form>
       </div>
-      <div class="admin-footer-actions">
-        <button id="resetDemo" class="button danger-outline" type="button">Restaurar dados demonstrativos</button>
-        <button id="adminLogout" class="button outline" type="button">Sair do painel</button>
-      </div>
     </div>
-  </section>
+  </div>
 
-  <!-- Região para mensagens flutuantes (Toasts) -->
-  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <!-- MODAL DE SUCESSO -->
+  <div id="successModal" class="modal-overlay">
+    <div class="modal-card" id="successContent">
+      <!-- Conteúdo injetado via JS -->
+    </div>
+  </div>
 
+  <!-- CONTAINER DE TOASTS -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- SCRIPT PRINCIPAL -->
+  <script src="script.js"></script>
 </body>
 </html>
